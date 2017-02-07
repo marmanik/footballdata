@@ -179,7 +179,7 @@ public class ResponseObjectMapper {
     public static FixtureSingle ToFixtureSingule(JSONObject jsonObject) throws JSONException {
         FixtureSingle fixtureSingle = new FixtureSingle();
         fixtureSingle.setFixture(ToFixture(jsonObject.getJSONObject("fixture")));
-        fixtureSingle.setHead2head(!jsonObject.isNull("head2head") ? ToHead2Head(jsonObject.getJSONObject("head2head")) : new Head2head());
+        fixtureSingle.setHead2head(!jsonObject.isNull("head2head") ? ToHead2Head(jsonObject.getJSONObject("head2head")) : null);
 
         return fixtureSingle;
     }
