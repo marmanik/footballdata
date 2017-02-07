@@ -35,4 +35,13 @@ public class LeagueTable {
     public void setStandings(List<Standing> standings) {
         this.standings = standings;
     }
+
+    @Override
+    public String toString() {
+        return "LeagueTable{" +
+                "leagueCaption='" + leagueCaption + '\'' +
+                ", matchday=" + matchday +
+                ", standings=" + standings +
+                '}';
+    }
 }

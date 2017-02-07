@@ -19,10 +19,10 @@ import static org.football.misc.Params.*;
  */
 @Service
 public class FootballDataService {
-    
+
     @Autowired
     private RestTemplate restTemplate;
-    
+
     private String apiKey;
 
     public FootballDataService(String apiKey) {
@@ -31,7 +31,7 @@ public class FootballDataService {
 
     public List<Competition> getCompetitionsBySeason(String season) throws JSONException {
         String url = COMPETITIONS.replace("{season}", season);
-        String responseBody =  getProvider(url);
+        String responseBody = getProvider(url);
         JSONArray jsonArray = new JSONArray(responseBody);
         List<Competition> competitions;
         competitions = ResponseObjectMapper.ToCompetitionList(jsonArray);
@@ -40,7 +40,7 @@ public class FootballDataService {
 
     public Competition getCompetitionById(String id) throws JSONException {
         String url = COMPETITIONS_SINGLE.replace("{id}", id);
-        String responseBody =  getProvider(url);
+        String responseBody = getProvider(url);
         JSONObject jsonObject = new JSONObject(responseBody);
         Competition competition;
         competition = ResponseObjectMapper.ToCompetition(jsonObject);
@@ -49,7 +49,7 @@ public class FootballDataService {
 
     public List<Team> getCompetitionTeamsById(String id) throws JSONException {
         String url = COMPETITIONS_TEAMS.replace("{id}", id);
-        String responseBody =  getProvider(url);
+        String responseBody = getProvider(url);
         JSONObject jsonObject = new JSONObject(responseBody);
         List<Team> teams;
         teams = ResponseObjectMapper.ToTeamList(jsonObject);
@@ -58,7 +58,7 @@ public class FootballDataService {
 
     public Team getTeamById(String id) throws JSONException {
         String url = TEAMS_SINGLE.replace("{id}", id);
-        String responseBody =  getProvider(url);
+        String responseBody = getProvider(url);
         JSONObject jsonObject = new JSONObject(responseBody);
         Team team;
         team = ResponseObjectMapper.ToTeam(jsonObject);
@@ -67,7 +67,7 @@ public class FootballDataService {
 
     public LeagueTable getCompetitionLeagueTableById(String id) throws JSONException {
         String url = COMPETITIONS_LEAGUETABLE.replace("{id}", id);
-        String responseBody =  getProvider(url);
+        String responseBody = getProvider(url);
         JSONObject jsonObject = new JSONObject(responseBody);
         LeagueTable leagueTable;
         leagueTable = ResponseObjectMapper.ToLeagueTable(jsonObject);
@@ -76,33 +76,43 @@ public class FootballDataService {
 
     public List<Fixture> getCompetitionFixturesById(String id) throws JSONException {
         String url = COMPETITIONS_FIXTURES.replace("{id}", id);
-        String responseBody =  getProvider(url);
+        String responseBody = getProvider(url);
         JSONObject jsonObject = new JSONObject(responseBody);
         List<Fixture> fixtures;
         fixtures = ResponseObjectMapper.ToFixtures(jsonObject);
         return fixtures;
     }
 
-    public FixtureSingle getFixtureSingleById(String id) throws JSONException {
-        String url = TEAMS_FIXTURES.replace("{id}", id);
-        String responseBody =  getProvider(url);
-        JSONObject jsonObject = new JSONObject(responseBody);
-        FixtureSingle fixtureSingle;
-        fixtureSingle = ResponseObjectMapper.ToFixtureSingule(jsonObject);
-        return fixtureSingle;
-    }
 
     public List<Player> getTeamPlayersById(String id) throws JSONException {
         String url = TEAMS_PLAYERS.replace("{id}", id);
-        String responseBody =  getProvider(url);
+        String responseBody = getProvider(url);
         JSONObject jsonObject = new JSONObject(responseBody);
         List<Player> players;
         players = ResponseObjectMapper.ToPlayers(jsonObject);
         return players;
     }
 
+    public List<Fixture> getTeamFixturesById(String id) throws JSONException {
+        String url = TEAMS_FIXTURES.replace("{id}", id);
+        String responseBody = getProvider(url);
+        JSONObject jsonObject = new JSONObject(responseBody);
+        List<Fixture> fixtures;
+        fixtures = ResponseObjectMapper.ToFixtures(jsonObject);
+        return fixtures;
+    }
 
-    private String getProvider(String url){
+
+    public FixtureSingle getFixtureSingleById(String id) throws JSONException {
+        String url = FIXTURE_SINGLE.replace("{id}", id);
+        String responseBody = getProvider(url);
+        JSONObject jsonObject = new JSONObject(responseBody);
+        FixtureSingle fixtureSingle;
+        fixtureSingle = ResponseObjectMapper.ToFixtureSingule(jsonObject);
+        return fixtureSingle;
+    }
+
+    private String getProvider(String url) {
         HttpHeaders headers = new HttpHeaders();
         headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
         headers.setContentType(MediaType.APPLICATION_JSON);

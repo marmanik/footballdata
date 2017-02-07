@@ -23,4 +23,12 @@ public class FixtureSingle {
     public void setHead2head(Head2head head2head) {
         this.head2head = head2head;
     }
+
+    @Override
+    public String toString() {
+        return "FixtureSingle{" +
+                "fixture=" + fixture +
+                ", head2head=" + head2head +
+                '}';
+    }
 }

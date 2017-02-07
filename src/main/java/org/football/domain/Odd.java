@@ -32,4 +32,13 @@ public class Odd {
     public void setAwayWin(Double awayWin) {
         this.awayWin = awayWin;
     }
+
+    @Override
+    public String toString() {
+        return "Odd{" +
+                "homeWin=" + homeWin +
+                ", draw=" + draw +
+                ", awayWin=" + awayWin +
+                '}';
+    }
 }

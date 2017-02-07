@@ -123,5 +123,24 @@ public class Standing {
     public void setAway(StandingAway away) {
         this.away = away;
     }
+
+    @Override
+    public String toString() {
+        return "Standing{" +
+                "position=" + position +
+                ", teamName='" + teamName + '\'' +
+                ", crestURI='" + crestURI + '\'' +
+                ", playedGames=" + playedGames +
+                ", points=" + points +
+                ", goals=" + goals +
+                ", goalsAgainst=" + goalsAgainst +
+                ", goalDifference=" + goalDifference +
+                ", wins=" + wins +
+                ", draws=" + draws +
+                ", losses=" + losses +
+                ", home=" + home +
+                ", away=" + away +
+                '}';
+    }
 }
 

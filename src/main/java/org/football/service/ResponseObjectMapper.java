@@ -88,7 +88,7 @@ public class ResponseObjectMapper {
             standing.setDraws(jsonObjectStanding.getInt("draws"));
             standing.setLosses(jsonObjectStanding.getInt("losses"));
 
-            JSONObject away = jsonObject.getJSONObject("away");
+            JSONObject away = jsonObjectStanding.getJSONObject("away");
             standingAway.setWins(away.getInt("wins"));
             standingAway.setGoalsAgainst(away.getInt("goalsAgainst"));
             standingAway.setGoals(away.getInt("goals"));
@@ -97,7 +97,7 @@ public class ResponseObjectMapper {
 
             standing.setAway(standingAway);
 
-            JSONObject home = jsonObject.getJSONObject("home");
+            JSONObject home = jsonObjectStanding.getJSONObject("home");
             standingHome.setWins(home.getInt("wins"));
             standingHome.setGoalsAgainst(home.getInt("goalsAgainst"));
             standingHome.setGoals(home.getInt("goals"));
@@ -136,16 +136,21 @@ public class ResponseObjectMapper {
         fixture.setHomeTeamName(jsonObject.getString("homeTeamName"));
         fixture.setAwayTeamName(jsonObject.getString("awayTeamName"));
 
-        JSONObject resultInner = jsonObject.getJSONObject("result");
-        result.setGoalsAwayTeam(resultInner.getInt("goalsAwayTeam"));
-        result.setGoalsHomeTeam(resultInner.getInt("goalsHomeTeam"));
+        if (!jsonObject.isNull("result")) {
+            JSONObject resultInner = jsonObject.getJSONObject("result");
+            result.setGoalsAwayTeam(!jsonObject.isNull("goalsAwayTeam") ? resultInner.getInt("goalsAwayTeam") : 0);
+            result.setGoalsHomeTeam(!jsonObject.isNull("goalsHomeTeam") ? resultInner.getInt("goalsHomeTeam") : 0);
+        }
 
         fixture.setResult(result);
 
-        JSONObject oddInner = jsonObject.getJSONObject("odds");
-        odd.setAwayWin(oddInner.getDouble("awayWin"));
-        odd.setDraw(oddInner.getDouble("draw"));
-        odd.setHomeWin(oddInner.getDouble("homeWin"));
+        System.out.println(jsonObject.toString());
+        if (!jsonObject.isNull("odds")) {
+            JSONObject oddInner = jsonObject.getJSONObject("odds");
+            odd.setAwayWin(oddInner.getDouble("awayWin"));
+            odd.setDraw(oddInner.getDouble("draw"));
+            odd.setHomeWin(oddInner.getDouble("homeWin"));
+        }
 
         fixture.setOdds(odd);
 
@@ -166,7 +171,7 @@ public class ResponseObjectMapper {
         head2head.setLastAwayWinAwayTeam(ToFixture(jsonObject.getJSONObject("lastAwayWinAwayTeam")));
         head2head.setLastWinAwayTeam(ToFixture(jsonObject.getJSONObject("lastWinAwayTeam")));
         head2head.setLastWinHomeTeam(ToFixture(jsonObject.getJSONObject("lastWinHomeTeam")));
-        head2head.setFixtures(ToFixtures(jsonObject.getJSONObject("head2head")));
+        head2head.setFixtures(ToFixtures(jsonObject));
 
         return head2head;
     }
@@ -174,7 +179,7 @@ public class ResponseObjectMapper {
     public static FixtureSingle ToFixtureSingule(JSONObject jsonObject) throws JSONException {
         FixtureSingle fixtureSingle = new FixtureSingle();
         fixtureSingle.setFixture(ToFixture(jsonObject.getJSONObject("fixture")));
-        fixtureSingle.setHead2head(ToHead2Head(jsonObject.getJSONObject("head2head")));
+        fixtureSingle.setHead2head(!jsonObject.isNull("head2head") ? ToHead2Head(jsonObject.getJSONObject("head2head")) : new Head2head());
 
         return fixtureSingle;
     }
@@ -187,13 +192,13 @@ public class ResponseObjectMapper {
             JSONObject jsonObjectPlayer = jsonArray.getJSONObject(i);
             Player player = new Player();
 
-            player.setName(jsonObjectPlayer.getString("name"));
-            player.setPosition(jsonObjectPlayer.getString("position"));
-            player.setContractUntil(jsonObjectPlayer.getString("contractUntil"));
-            player.setJerseyNumber(jsonObjectPlayer.getInt("jerseyNumber"));
-            player.setDateOfBirth(jsonObjectPlayer.getString("dateOfBirth"));
-            player.setNationality(jsonObjectPlayer.getString("nationality"));
-            player.setMarketValue(jsonObjectPlayer.getString("marketValue"));
+            player.setName(!jsonObjectPlayer.isNull("name") ? jsonObjectPlayer.getString("name") : "");
+            player.setPosition(!jsonObjectPlayer.isNull("position") ? jsonObjectPlayer.getString("position") : "");
+            player.setContractUntil(!jsonObjectPlayer.isNull("contractUntil") ? jsonObjectPlayer.getString("contractUntil") : "");
+            player.setJerseyNumber(!jsonObjectPlayer.isNull("jerseyNumber") ? jsonObjectPlayer.getInt("jerseyNumber") : 0);
+            player.setDateOfBirth(!jsonObjectPlayer.isNull("dateOfBirth") ? jsonObjectPlayer.getString("dateOfBirth") : "");
+            player.setNationality(!jsonObjectPlayer.isNull("nationality") ? jsonObjectPlayer.getString("nationality") : "");
+            player.setMarketValue(!jsonObjectPlayer.isNull("marketValue") ? jsonObjectPlayer.getString("marketValue") : "");
 
             String selfLink = jsonObject.getJSONObject("_links").getJSONObject("team").getString("href");
             player.setTeamId(Long.valueOf(getLastBitFromUrl(selfLink)));

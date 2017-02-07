@@ -50,4 +50,15 @@ public class StandingHome {
     public void setLosses(Integer losses) {
         this.losses = losses;
     }
+
+    @Override
+    public String toString() {
+        return "StandingHome{" +
+                "goals=" + goals +
+                ", goalsAgainst=" + goalsAgainst +
+                ", wins=" + wins +
+                ", draws=" + draws +
+                ", losses=" + losses +
+                '}';
+    }
 }

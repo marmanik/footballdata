@@ -77,4 +77,18 @@ public class Fixture {
     public void setOdds(Odd odds) {
         this.odds = odds;
     }
+
+    @Override
+    public String toString() {
+        return "Fixture{" +
+                "id=" + id +
+                ", date='" + date + '\'' +
+                ", status='" + status + '\'' +
+                ", matchday=" + matchday +
+                ", homeTeamName='" + homeTeamName + '\'' +
+                ", awayTeamName='" + awayTeamName + '\'' +
+                ", result=" + result +
+                ", odds=" + odds +
+                '}';
+    }
 }

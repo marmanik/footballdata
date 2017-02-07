@@ -87,6 +87,18 @@ public class Competition {
         this.lastUpdated = lastUpdated;
     }
 
-
-
+    @Override
+    public String toString() {
+        return "Competition{" +
+                "id=" + id +
+                ", caption='" + caption + '\'' +
+                ", league='" + league + '\'' +
+                ", year='" + year + '\'' +
+                ", currentMatchday=" + currentMatchday +
+                ", numberOfMatchdays=" + numberOfMatchdays +
+                ", numberOfTeams=" + numberOfTeams +
+                ", numberOfGames=" + numberOfGames +
+                ", lastUpdated='" + lastUpdated + '\'' +
+                '}';
+    }
 }

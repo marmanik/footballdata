@@ -108,4 +108,21 @@ public class Head2head {
     public void setFixtures(List<Fixture> fixtures) {
         this.fixtures = fixtures;
     }
+
+    @Override
+    public String toString() {
+        return "Head2head{" +
+                "count=" + count +
+                ", timeFrameStart='" + timeFrameStart + '\'' +
+                ", timeFrameEnd='" + timeFrameEnd + '\'' +
+                ", homeTeamWins=" + homeTeamWins +
+                ", awayTeamWins=" + awayTeamWins +
+                ", draws=" + draws +
+                ", lastHomeWinHomeTeam=" + lastHomeWinHomeTeam +
+                ", lastAwayWinAwayTeam=" + lastAwayWinAwayTeam +
+                ", lastWinHomeTeam=" + lastWinHomeTeam +
+                ", lastWinAwayTeam=" + lastWinAwayTeam +
+                ", fixtures=" + fixtures +
+                '}';
+    }
 }

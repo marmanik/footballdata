@@ -23,4 +23,12 @@ public class Result {
     public void setGoalsAwayTeam(Integer goalsAwayTeam) {
         this.goalsAwayTeam = goalsAwayTeam;
     }
+
+    @Override
+    public String toString() {
+        return "Result{" +
+                "goalsHomeTeam=" + goalsHomeTeam +
+                ", goalsAwayTeam=" + goalsAwayTeam +
+                '}';
+    }
 }

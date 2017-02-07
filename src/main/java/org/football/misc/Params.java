@@ -16,4 +16,8 @@ public final class Params {
     public static final String TEAMS_SINGLE = BASE_URL + "teams/{id}";
     public static final String TEAMS_FIXTURES = BASE_URL + "teams/{id}/fixtures/";
     public static final String TEAMS_PLAYERS = BASE_URL + "teams/{id}/players";
+
+    public static final String FIXTURE_SINGLE = BASE_URL + "fixtures/{id}";
 }
+
+

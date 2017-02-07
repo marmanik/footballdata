@@ -5,13 +5,13 @@ package org.football.domain;
  */
 public class Player {
 
-    private String  name;
-    private String  position;
-    private Integer  jerseyNumber;
-    private String  dateOfBirth;
-    private String  nationality;
-    private String  contractUntil;
-    private String  marketValue;
+    private String name;
+    private String position;
+    private Integer jerseyNumber;
+    private String dateOfBirth;
+    private String nationality;
+    private String contractUntil;
+    private String marketValue;
     private Long teamId;
 
     public String getName() {
@@ -76,5 +76,20 @@ public class Player {
 
     public void setTeamId(Long teamId) {
         this.teamId = teamId;
+    }
+
+
+    @Override
+    public String toString() {
+        return "Player{" +
+                "name='" + name + '\'' +
+                ", position='" + position + '\'' +
+                ", jerseyNumber=" + jerseyNumber +
+                ", dateOfBirth='" + dateOfBirth + '\'' +
+                ", nationality='" + nationality + '\'' +
+                ", contractUntil='" + contractUntil + '\'' +
+                ", marketValue='" + marketValue + '\'' +
+                ", teamId=" + teamId +
+                '}';
     }
 }

@@ -60,4 +60,16 @@ public class Team {
     public void setCrestUrl(String crestUrl) {
         this.crestUrl = crestUrl;
     }
+
+    @Override
+    public String toString() {
+        return "Team{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", code='" + code + '\'' +
+                ", shortName='" + shortName + '\'' +
+                ", squadMarketValue='" + squadMarketValue + '\'' +
+                ", crestUrl='" + crestUrl + '\'' +
+                '}';
+    }
 }
