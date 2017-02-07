@@ -28,10 +28,10 @@ public class FootballDataProvider {
         String apiKey = environment.getProperty("API_KEY","");
         headers.set("X-Auth-Token", apiKey);
 
-        HttpEntity<String> entity = new HttpEntity<String>("parameters", headers);
 
-        ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.GET, entity, String.class);
 
-        return response.getBody();
+       // ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.GET, entity, String.class);
+
+        return "";
     }
 }
