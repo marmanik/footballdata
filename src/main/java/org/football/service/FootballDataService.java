@@ -23,15 +23,11 @@ public class FootballDataService {
     @Autowired
     private RestTemplate restTemplate;
     
-    private HttpHeaders headers;
+    private String apiKey;
 
     public FootballDataService(String apiKey) {
-        this.headers = new HttpHeaders();
-        headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
-        headers.setContentType(MediaType.APPLICATION_JSON);
-        headers.set("X-Auth-Token", apiKey);
+        this.apiKey = apiKey;
     }
-
 
     public List<Competition> getCompetitionsBySeason(String season) throws JSONException {
         String url = COMPETITIONS.replace("{season}", season);
@@ -106,10 +102,12 @@ public class FootballDataService {
     }
 
 
-    public String getProvider(String url){
-
+    private String getProvider(String url){
+        HttpHeaders headers = new HttpHeaders();
+        headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.set("X-Auth-Token", this.apiKey);
         HttpEntity<String> entity = new HttpEntity<String>("parameters", headers);
-
         ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.GET, entity, String.class);
 
         return response.getBody();
